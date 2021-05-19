@@ -5,6 +5,7 @@ Based on https://mcuoneclipse.com/2021/05/01/visual-studio-code-for-c-c-with-arm
 - Using FRDM-K64F board
 - The base example didn't have any hardware interaction so I've made simple led and button functions
 - Implemented openOCD debug configuration (needs openOCD installed)
+- Using MCUXPRESSO SDK from github: https://github.com/NXPmicro/mcux-sdk as submodule and linking files from that folder
 
 ## Example Description
   - When no switches pressed the led is RED
