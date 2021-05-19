@@ -30,7 +30,7 @@
             "type": "cortex-debug",
             "servertype": "openocd",            
             "configFiles": ["board/frdm-k64f.cfg"],
-            "searchDir": ["${workspaceRoot}", "C:/openocd/scripts"],
+            "searchDir": ["${workspaceRoot}/openocd", "C:/openocd/scripts"],
             "runToMain": true                       
         }
     ]
