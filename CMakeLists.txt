@@ -9,12 +9,14 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/arm-none-eabi-gcc.cmake)
 # Setup project, output and linker file
 project(Tutorial)
 set(EXECUTABLE ${PROJECT_NAME}.elf)
-set(LINKER_FILE ${SDK_PATH}/devices/${SDK_MCU}/gcc/MK64FN1M0xxx12_flash.ld)
+set(LINKER_FILE ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/gcc/${SDK_MCU_CORE}_flash.ld)
 
 enable_language(C ASM)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
+
+install(DIRECTORY DESTINATION ${CMAKE_SOURCE_DIR}/build)
 
 # Optional: issue a message to be sure it uses the correct toolchain file.
 message(STATUS "CMAKE_TOOLCHAIN_FILE is: ${CMAKE_TOOLCHAIN_FILE}")
@@ -24,13 +26,13 @@ set(SRC_FILES
         src/main.c
         src/leds.c
         src/buttons.c
-        ${SDK_PATH}/devices/${SDK_MCU}/gcc/startup_MK64F12.S
-        ${SDK_PATH}/devices/${SDK_MCU}/system_MK64F12.c
+        ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/gcc/startup_${SDK_MCU_FAMILY}.S
+        ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/system_${SDK_MCU_FAMILY}.c
         ${BOARD_PATH}/board.c
         ${BOARD_PATH}/pin_mux.c
         ${BOARD_PATH}/clock_config.c
         ${BOARD_PATH}/peripherals.c
-        ${SDK_PATH}/devices/${SDK_MCU}/drivers/fsl_clock.c 
+        ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/drivers/fsl_clock.c 
         ${SDK_PATH}/components/serial_manager/fsl_component_serial_manager.c
         ${SDK_PATH}/components/serial_manager/fsl_component_serial_port_uart.c
         ${SDK_PATH}/components/uart/fsl_adapter_uart.c
@@ -45,8 +47,8 @@ add_executable(${EXECUTABLE} ${SRC_FILES})
 
 # List of compiler defines, prefix with -D compiler option
 target_compile_definitions(${EXECUTABLE} PRIVATE
-        -DCPU_MK64FN1M0VLL12
-        -DCPU_MK64FN1M0VLL12_cm4
+        -DCPU_${SDK_MCU_PKG}
+        -DCPU_${SDK_MCU_PKG}_cm4
         -DNDEBUG
         -DSERIAL_PORT_TYPE_UART=1
         -DSDK_DEBUGCONSOLE=1
@@ -56,8 +58,8 @@ target_compile_definitions(${EXECUTABLE} PRIVATE
 target_include_directories(${EXECUTABLE} PRIVATE
         src
         ${BOARD_PATH}
-        ${SDK_PATH}/devices/${SDK_MCU}
-        ${SDK_PATH}/devices/${SDK_MCU}/drivers        
+        ${SDK_PATH}/devices/${SDK_MCU_FAMILY}
+        ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/drivers        
         ${SDK_PATH}/CMSIS/Include
         ${SDK_PATH}/utilities/debug_console/debug_console
         ${SDK_PATH}/utilities/debug_console/str
