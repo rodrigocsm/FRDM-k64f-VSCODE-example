@@ -28,8 +28,7 @@ void leds_set(COLOR color)
         break;
     case BLUE:
         GPIO_PinWrite(BOARD_LED_BLUE_GPIO, BOARD_LED_BLUE_PIN, LED_ON);
-        led_state = color;
-        PRINTF("Led aceso com a cor AZUL");
+        led_state = color;        
         break;
     case GREEN:
         GPIO_PinWrite(BOARD_LED_GREEN_GPIO, BOARD_LED_GREEN_PIN, LED_ON);
