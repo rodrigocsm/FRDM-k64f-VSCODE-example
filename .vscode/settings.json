@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "board.h": "c",
+        "fsl_usart.h": "c",
+        "pin_mux.h": "c",
+        "cstdio": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
