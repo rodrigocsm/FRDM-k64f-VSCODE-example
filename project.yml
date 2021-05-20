@@ -35,6 +35,8 @@
     - -:test/support
   :source:
     - src/**
+  :include:
+    - src/hal/**
   :support:
     - test/support
   :libraries: []
@@ -47,12 +49,14 @@
   :test:
     - *common_defines
     - TEST
+    - CPU_MK64FN1M0VLL12
   :test_preprocess:
     - *common_defines
     - TEST
 
-:cmock:
+:cmock:  
   :mock_prefix: mock_
+  :treat_inlines: :include
   :when_no_prototypes: :warn
   :enforce_strict_ordering: TRUE
   :plugins:
@@ -63,7 +67,7 @@
     uint16:   HEX16
     uint32:   UINT32
     int8:     INT8
-    bool:     UINT8
+    bool:     UINT8  
 
 # Add -gcov to the plugins list to make sure of the gcov plugin
 # You will need to have gcov and gcovr both installed to make it work.

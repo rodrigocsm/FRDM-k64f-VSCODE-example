@@ -26,6 +26,7 @@ set(SRC_FILES
         src/main.c
         src/leds.c
         src/buttons.c
+        src/hal/gpio_hal.c
         ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/gcc/startup_${SDK_MCU_FAMILY}.S
         ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/system_${SDK_MCU_FAMILY}.c
         ${BOARD_PATH}/board.c
@@ -57,6 +58,7 @@ target_compile_definitions(${EXECUTABLE} PRIVATE
 # List of includ directories
 target_include_directories(${EXECUTABLE} PRIVATE
         src
+        src/hal
         ${BOARD_PATH}
         ${SDK_PATH}/devices/${SDK_MCU_FAMILY}
         ${SDK_PATH}/devices/${SDK_MCU_FAMILY}/drivers        

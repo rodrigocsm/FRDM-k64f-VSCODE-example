@@ -1,7 +1,6 @@
-#include "buttons.h"
-#include "pin_mux.h"
-#include "fsl_gpio.h"
 #include <stdint.h>
+#include "buttons.h"
+#include "gpio_hal.h"
 
 uint32_t buttons_counter[NUM_OF_BUTTONS];
 BUTTON_STATE buttons_states[NUM_OF_BUTTONS];
@@ -11,7 +10,7 @@ uint32_t hold_counter[NUM_OF_BUTTONS];
 void buttons_init(void)
 {
     int i;
-    BOARD_InitButtonsPins();
+    pin_init();
     for (i = 0; i < NUM_OF_BUTTONS; i++)
     {
         buttons_counter[i] = 0;
@@ -24,25 +23,22 @@ void buttons_init(void)
 void buttons_process(void)
 {
     int i = 0;
-    GPIO_Type *base = NULL;
-    uint32_t pin = 0;
+    PIN pin = PIN_SW2;
     uint32_t read = 0;
     for (i = 0; i < NUM_OF_BUTTONS; i++)
     {
         switch (i)
         {
-        case SW2:
-            base = BOARD_SW2_GPIO;
-            pin = BOARD_SW2_PIN;
+        case SW2:            
+            pin = PIN_SW2;
             break;
-        case SW3:
-            base = BOARD_SW3_GPIO;
-            pin = BOARD_SW3_PIN;
+        case SW3:            
+            pin = PIN_SW3;
             break;
         default:
             return;
         }
-        read = GPIO_PinRead(base, pin);
+        read = pin_read(pin);
         switch (buttons_states[i])
         {  
         case RELEASED:

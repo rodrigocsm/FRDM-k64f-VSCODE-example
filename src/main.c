@@ -1,18 +1,10 @@
 #include <stdint.h>
-#include "board.h"
-#include "pin_mux.h"
-#include "peripherals.h"
-
 #include "leds.h"
 #include "buttons.h"
 
 uint32_t global = 0;
 int main(void)
 {
-    BOARD_InitBootPins();
-    BOARD_InitBootClocks();
-    BOARD_InitDebugConsole();
-    BOARD_InitBootPeripherals();
     leds_init();
     buttons_init();
     uint32_t local = 0;
